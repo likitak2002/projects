@@ -37,7 +37,9 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-      var myOpacity = 1.0;
+  var myOpacity = 1.0;
+  bool isVisible = true;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,12 +51,19 @@ class _MyHomePageState extends State<MyHomePage> {
             AnimatedOpacity(
               opacity: myOpacity,
               duration: Duration(seconds: 2),
-              child: Container(color: Colors.black26, width: 100, height: 100),
+              curve: Curves.elasticIn,
+              child: Container(color: Colors.black26, width: 200, height: 100),
             ),
             ElevatedButton(
               onPressed: () {
                 setState(() {
-                  myOpacity = 0.0;
+                  if (isVisible) {
+                    myOpacity = 0.0;
+                    isVisible = false;
+                  } else {
+                    myOpacity = 1.0;
+                    isVisible = true;
+                  }
                 });
               },
               child: Text('Click here'),
@@ -65,3 +74,4 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
+
