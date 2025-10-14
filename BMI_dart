@@ -42,7 +42,7 @@ class _HomepageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(backgroundColor: Colors.blueGrey, title: Text('BMI APP ')),
+      appBar: AppBar(backgroundColor: Colors.white, title: Text('BMI APP ')),
       body: Container(
         color: bgColor,
         child: Center(
@@ -71,7 +71,7 @@ class _HomepageState extends State<HomePage> {
                     label: Text('Enter your height (in cms)'),
                     prefixIcon: Icon(Icons.height),
                   ),
-                  keyboardType: TextInputType.number,
+                  keyboardType: TextInputType.numberWithOptions(signed: true),
                 ),
                 SizedBox(height: 11),
 
@@ -112,7 +112,7 @@ class _HomepageState extends State<HomePage> {
                         bgColor = Colors.green;
                       }
 
-                      result = 'Your BMI is ${bmi.toStringAsFixed(2)}';
+                      result = '$msg \n BMI is ${bmi.toStringAsFixed(2)}';
                       setState(() {});
                     } else {
                       setState(() {
@@ -132,3 +132,4 @@ class _HomepageState extends State<HomePage> {
     );
   }
 }
+
