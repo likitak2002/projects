@@ -1,0 +1,73 @@
+// import 'dart:async';
+
+import 'package:flutter/material.dart';
+// import 'package:flutterbasics/profile_screen.dart';
+// import 'package:flutterbasics/Intropage.dart';
+// import 'package:flutterbasics/widgets/splash_screen.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Flutter Counter',
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(primarySwatch: Colors.blue),
+      home: HomePage(),
+    );
+  }
+}
+
+class HomePage extends StatefulWidget {
+  const HomePage({super.key});
+  @override
+  State<HomePage> createState() => _HomepageState();
+}
+
+class _HomepageState extends State<HomePage>
+    with SingleTickerProviderStateMixin {
+  late Animation animation;
+  late Animation colorAnimation;
+  late AnimationController animationController; //controller
+  @override
+  void initState() {
+    super.initState();
+    animationController = AnimationController(
+      vsync: this,
+      duration: Duration(seconds: 5),
+    );
+    animation = Tween(begin: 0.0, end: 200.0).animate(animationController);
+    colorAnimation = Tween(
+      begin: Colors.blue,
+      end: Colors.orange,
+    ).animate(animationController);
+    animationController.addListener(() {
+      // ignore: avoid_print
+      print(animation.value);
+      setState(() {});
+    });
+    animationController.forward();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.blue,
+        title: Text('Mapping Lists'),
+      ),
+      body: Center(
+        child: Container(
+          width: animation.value,
+          height: animation.value,
+          color: colorAnimation.value,
+        ),
+      ),
+    );
+  }
+}
